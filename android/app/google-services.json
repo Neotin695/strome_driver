@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "643976814869",
+    "firebase_url": "https://stromeshop-457af-default-rtdb.firebaseio.com",
+    "project_id": "stromeshop-457af",
+    "storage_bucket": "stromeshop-457af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643976814869:android:acdcfb28bbdc5e01c4491c",
+        "android_client_info": {
+          "package_name": "com.driver.stromesshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY2kEyJmlbFnFvJGHCqx1BzxJw8bDeDeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643976814869:android:6bd63f48f9f87707c4491c",
+        "android_client_info": {
+          "package_name": "com.foodies.customer.android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY2kEyJmlbFnFvJGHCqx1BzxJw8bDeDeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643976814869:android:b0a4f350c7f290bec4491c",
+        "android_client_info": {
+          "package_name": "com.restaurant.stromesshop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY2kEyJmlbFnFvJGHCqx1BzxJw8bDeDeg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
