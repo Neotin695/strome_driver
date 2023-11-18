@@ -15,7 +15,6 @@ import 'package:foodie_driver/ui/accountDetails/AccountDetailsScreen.dart';
 import 'package:foodie_driver/ui/auth/AuthScreen.dart';
 import 'package:foodie_driver/ui/contactUs/ContactUsScreen.dart';
 import 'package:foodie_driver/ui/reauthScreen/reauth_user_screen.dart';
-import 'package:foodie_driver/ui/settings/SettingsScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final User user;

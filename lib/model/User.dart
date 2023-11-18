@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:foodie_driver/constants.dart';
 import 'package:foodie_driver/model/AddressModel.dart';
-import 'package:foodie_driver/model/OrderModel.dart';
 
 class User with ChangeNotifier {
   String email;

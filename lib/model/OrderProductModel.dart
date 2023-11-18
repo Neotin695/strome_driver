@@ -52,7 +52,7 @@ class OrderProductModel {
     }
 
     int quanVal = 0;
-    if (parsedJson['quantity'] == null || parsedJson['quantity'] == double.nan || parsedJson['quantity'] == double.infinity) {
+    if (parsedJson['quantity'] == null || parsedJson['quantity'] == double.infinity) {
       quanVal = 0;
     } else {
       if (parsedJson['quantity'] is String) {
