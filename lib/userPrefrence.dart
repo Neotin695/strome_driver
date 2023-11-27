@@ -57,7 +57,8 @@ class UserPreference {
 
   static getPayPalData() {
     final String? jsonData = _preferences.getString(paypalKey);
-    if (jsonData != null) return PaypalSettingData.fromJson((jsonDecode(jsonData)));
+    if (jsonData != null)
+      return PaypalSettingData.fromJson((jsonDecode(jsonData)));
   }
 
   static String payFast = "payFast";
@@ -69,7 +70,8 @@ class UserPreference {
 
   static getPayFastData() {
     final String? jsonData = _preferences.getString(payFast);
-    if (jsonData != null) return PayFastSettingData.fromJson((jsonDecode(jsonData)));
+    if (jsonData != null)
+      return PayFastSettingData.fromJson((jsonDecode(jsonData)));
   }
 
   static String mercadoPago = "mercadoPago";
@@ -81,10 +83,11 @@ class UserPreference {
 
   static getMercadoPago() {
     final String? jsonData = _preferences.getString(mercadoPago);
-    if (jsonData != null) return MercadoPagoSettingData.fromJson((jsonDecode(jsonData)));
+    if (jsonData != null)
+      return MercadoPagoSettingData.fromJson((jsonDecode(jsonData)));
   }
 
-  static String stripeKey = "stripeKey";
+  static String stripeKey = "";
 
   static setStripeData(StripeSettingData stripeSettingModel) async {
     final jsonData = jsonEncode(stripeSettingModel);
@@ -92,15 +95,24 @@ class UserPreference {
   }
 
   static Future<StripeSettingData> getStripeData() async {
-    final String? jsonData = _preferences.getString(stripeKey);
-    final stripeData = jsonDecode(jsonData!);
-    debugPrint(stripeData.toString());
-    return StripeSettingData.fromJson(stripeData);
+    if (stripeKey.isNotEmpty) {
+      try {
+        final String? jsonData = _preferences.getString(stripeKey);
+        final stripeData = jsonDecode(jsonData!);
+        debugPrint(stripeData.toString());
+        return StripeSettingData.fromJson(stripeData);
+      } catch (e) {
+        return StripeSettingData(isSandboxEnabled: false, isEnabled: false);
+      }
+    } else {
+      return StripeSettingData(isSandboxEnabled: false, isEnabled: false);
+    }
   }
 
   static String flutterWaveStack = "flutterWaveStack";
 
-  static setFlutterWaveData(FlutterWaveSettingData flutterWaveSettingData) async {
+  static setFlutterWaveData(
+      FlutterWaveSettingData flutterWaveSettingData) async {
     debugPrint(flutterWaveSettingData.toString());
     final jsonData = jsonEncode(flutterWaveSettingData);
     await _preferences.setString(flutterWaveStack, jsonData);
@@ -109,7 +121,7 @@ class UserPreference {
   static Future<FlutterWaveSettingData> getFlutterWaveData() async {
     final String? jsonData = _preferences.getString(flutterWaveStack);
     final flutterWaveData = jsonDecode(jsonData!);
-   // debugPrint(flutterWaveData);
+    // debugPrint(flutterWaveData);
     return FlutterWaveSettingData.fromJson(flutterWaveData);
   }
 
@@ -121,22 +133,37 @@ class UserPreference {
   }
 
   static Future<PayStackSettingData> getPayStackData() async {
-    final String? jsonData = _preferences.getString(payStack);
-    final payStackData = jsonDecode(jsonData!);
-    return PayStackSettingData.fromJson(payStackData);
+    try {
+      final String? jsonData = _preferences.getString(payStack);
+      final payStackData = jsonDecode(jsonData!);
+      return PayStackSettingData.fromJson(payStackData);
+    } catch (e) {
+      return PayStackSettingData(isSandbox: false, isEnabled: false);
+    }
   }
 
   static String _paytmKey = "paytmKey";
 
   static setPaytmData(PaytmSettingData paytmSettingModel) async {
-    final jsonData = jsonEncode(paytmSettingModel);
+   try{
+     final jsonData = jsonEncode(paytmSettingModel);
     await _preferences.setString(_paytmKey, jsonData);
+   }catch(e){
+    
+   }
   }
 
   static getPaytmData() async {
-    final String? jsonData = _preferences.getString(_paytmKey);
-    final paytmData = jsonDecode(jsonData!);
-    return PaytmSettingData.fromJson(paytmData);
+    try {
+      final String? jsonData = _preferences.getString(_paytmKey);
+      final paytmData = jsonDecode(jsonData!);
+      return PaytmSettingData.fromJson(paytmData);
+    } catch (e) {
+      return PaytmSettingData(
+        isEnabled: false,
+        isSandboxEnabled: false,
+      );
+    }
   }
 
   static const _orderId = "orderId";

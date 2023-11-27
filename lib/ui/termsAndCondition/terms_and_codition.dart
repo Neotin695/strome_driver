@@ -11,15 +11,20 @@ class TermsAndCondition extends StatefulWidget {
 }
 
 class _TermsAndConditionState extends State<TermsAndCondition> {
-  String? termsAndCondition;
+  String termsAndCondition = 'no terms and condition';
 
   @override
   void initState() {
-    FirebaseFirestore.instance.collection(Setting).doc("termsAndConditions").get().then((value) {
-      print(value['termsAndConditions']);
-      setState(() {
-        termsAndCondition = value['termsAndConditions'];
-      });
+    FirebaseFirestore.instance
+        .collection(Setting)
+        .doc("termsAndConditions")
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          termsAndCondition = value['termsAndConditions'];
+        });
+      }
     });
     super.initState();
   }
@@ -46,8 +51,10 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
                   '''
                   $termsAndCondition
                    ''',
-                  onErrorBuilder: (context, element, error) => Text('$element error: $error'),
-                  onLoadingBuilder: (context, element, loadingProgress) => const CircularProgressIndicator(),
+                  onErrorBuilder: (context, element, error) =>
+                      Text('$element error: $error'),
+                  onLoadingBuilder: (context, element, loadingProgress) =>
+                      const CircularProgressIndicator(),
                 )
               : const Center(child: CircularProgressIndicator()),
         ),

@@ -11,14 +11,20 @@ class PrivacyPolicyScreen extends StatefulWidget {
 }
 
 class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
-  String? termsAndCondition;
+  String privacyPolicy = 'no privacy policy';
 
   @override
   void initState() {
-    FirebaseFirestore.instance.collection(Setting).doc("privacyPolicy").get().then((value) {
-      setState(() {
-        termsAndCondition = value['privacy_policy'];
-      });
+    FirebaseFirestore.instance
+        .collection(Setting)
+        .doc("privacyPolicy")
+        .get()
+        .then((value) {
+      if (value.exists) {
+        setState(() {
+          privacyPolicy = value['privacy_policy'];
+        });
+      }
     });
     super.initState();
   }
@@ -39,14 +45,16 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: termsAndCondition != null
+          child: privacyPolicy != null
               ? HtmlWidget(
                   // the first parameter (`html`) is required
                   '''
-                  $termsAndCondition
+                  $privacyPolicy
                    ''',
-                  onErrorBuilder: (context, element, error) => Text('$element error: $error'),
-                  onLoadingBuilder: (context, element, loadingProgress) => const CircularProgressIndicator(),
+                  onErrorBuilder: (context, element, error) =>
+                      Text('$element error: $error'),
+                  onLoadingBuilder: (context, element, loadingProgress) =>
+                      const CircularProgressIndicator(),
                 )
               : const Center(child: CircularProgressIndicator()),
         ),

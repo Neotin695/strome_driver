@@ -29,31 +29,37 @@ class _LanguageChooceScreenState extends State<LanguageChooseScreen> {
 
   void loadData() async {
     languageList.clear();
-    await FireStoreUtils.firestore.collection(Setting).doc("languages").get().then((value) {
-      List list = value.data()!["list"];
-      for (int i = 0; i < list.length; i++) {
-        Map data = list[i];
-        if (data["isActive"]) {
-          Data langData = new Data();
-          langData.language = data["title"];
-          langData.languageCode = data["slug"];
+    await FireStoreUtils.firestore
+        .collection(Setting)
+        .doc("languages")
+        .get()
+        .then((value) {
+      if (value.exists) {
+        List list = value.data()!["list"];
+        for (int i = 0; i < list.length; i++) {
+          Map data = list[i];
+          if (data["isActive"]) {
+            Data langData = new Data();
+            langData.language = data["title"];
+            langData.languageCode = data["slug"];
 
-          if (langData.languageCode == "en") {
-            langData.icon = "assets/flags/ic_uk.png";
-          } else if (langData.languageCode == "es") {
-            langData.icon = "assets/flags/ic_spain.png";
-          } else if (langData.languageCode == "ar") {
-            langData.icon = "assets/flags/ic_uae.png";
-          } else if (langData.languageCode == "Fr") {
-            langData.icon = "assets/flags/ic_france.png";
-          } else if (langData.languageCode == "pt") {
-            langData.icon = "assets/flags/ic_portugal.png";
+            if (langData.languageCode == "en") {
+              langData.icon = "assets/flags/ic_uk.png";
+            } else if (langData.languageCode == "es") {
+              langData.icon = "assets/flags/ic_spain.png";
+            } else if (langData.languageCode == "ar") {
+              langData.icon = "assets/flags/ic_uae.png";
+            } else if (langData.languageCode == "Fr") {
+              langData.icon = "assets/flags/ic_france.png";
+            } else if (langData.languageCode == "pt") {
+              langData.icon = "assets/flags/ic_portugal.png";
+            }
+            languageList.add(langData);
           }
-          languageList.add(langData);
-        }
 
-        if (i == (languageList.length - 1)) {
-          setState(() {});
+          if (i == (languageList.length - 1)) {
+            setState(() {});
+          }
         }
       }
     });
@@ -73,7 +79,8 @@ class _LanguageChooceScreenState extends State<LanguageChooseScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: isDarkMode(context) ? Color(DARK_VIEWBG_COLOR) : Colors.white,
+        backgroundColor:
+            isDarkMode(context) ? Color(DARK_VIEWBG_COLOR) : Colors.white,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -85,16 +92,20 @@ class _LanguageChooceScreenState extends State<LanguageChooseScreen> {
                   return InkWell(
                     onTap: () {
                       setState(() {
-                        selectedLanguage = languageList[index].languageCode.toString();
+                        selectedLanguage =
+                            languageList[index].languageCode.toString();
                       });
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Container(
-                        decoration: languageList[index].languageCode == selectedLanguage
+                        decoration: languageList[index].languageCode ==
+                                selectedLanguage
                             ? BoxDecoration(
                                 border: Border.all(color: Color(COLOR_PRIMARY)),
-                                borderRadius: const BorderRadius.all(Radius.circular(5.0) //                 <--- border radius here
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(
+                                        5.0) //                 <--- border radius here
                                     ),
                               )
                             : null,
@@ -108,8 +119,11 @@ class _LanguageChooceScreenState extends State<LanguageChooseScreen> {
                                 width: 60,
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(left: 10, right: 10),
-                                child: Text(languageList[index].language.toString(), style: const TextStyle(fontSize: 16)),
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
+                                child: Text(
+                                    languageList[index].language.toString(),
+                                    style: const TextStyle(fontSize: 16)),
                               )
                             ],
                           ),

@@ -145,7 +145,7 @@ class _ContainerScreen extends State<ContainerScreen> {
     var value = data?['image'];
 
     setState(() {
-      placeholderImage = value;
+      placeholderImage = value ?? 'https://placehold.co/600x400';
       isLoading = false;
     });
   }
@@ -245,22 +245,18 @@ class _ContainerScreen extends State<ContainerScreen> {
                     Consumer<User>(builder: (context, user, _) {
                       return DrawerHeader(
                         margin: EdgeInsets.all(0.0),
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             displayCircleImage(
                                 user.profilePictureURL, 60, false),
                             Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
+                              padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 user.fullName(),
                                 style: TextStyle(color: Colors.white),
                               ),
-                            ),
-                            Text(
-                              user.email,
-                              style: TextStyle(color: Colors.white),
                             ),
                             SwitchListTile(
                               visualDensity:
