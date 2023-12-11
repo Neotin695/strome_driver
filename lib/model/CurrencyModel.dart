@@ -33,7 +33,7 @@ class CurrencyModel {
       isactive: parsedJson['isActive'] ?? '',
       id: parsedJson['id'] ?? '',
       name: parsedJson['name'] ?? '',
-      rounding: parsedJson['rounding'] ?? '',
+      rounding: parsedJson['rounding'] ?? 0,
       symbol: parsedJson['symbol'] ?? '',
       symbolatright: parsedJson['symbolAtRight'] ?? '',
     );
